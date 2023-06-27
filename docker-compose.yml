@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: &db_user ${DATABASE_USER:-admin}
+      PGUSER: *db_user
+      POSTGRES_PASSWORD: &db_password ${DATABASE_PASSWORD:-admin}
+      POSTGRES_DB: &db_database redscooter
+      PGDATABASE: *db_database
+    volumes:
+      - ${DATABASE_VOLUME:-./database-data}:/var/lib/postgresql/data
+    ports:
+      - "8002:5432"
+    command: postgres -c listen_addresses='*' # todo removes this and use network config
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 0s

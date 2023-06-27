@@ -1,0 +1,76 @@
+server:
+    port: 8080
+    forward-headers-strategy: framework
+    error:
+        include-stacktrace: never
+        include-message: never
+
+
+spring-doc:
+    swagger-ui:
+        disable-swagger-default-url: true
+        operations-sorter: alpha
+        path: /api/api-docs/swagger-ui.html
+        config-url: /api/api-docs/v3/swagger-config
+
+        urls-primary-name: All
+        urls[0]:
+            name: All
+            url: /api/api-docs/v3
+
+    api-docs:
+        path: /api/api-docs/v3
+        groups:
+            enabled=true:
+
+
+cors:
+    allowed-origins:
+        - 'http://localhost:3000'
+        - 'http://75.119.149.135:3000'
+    allowed-methods: GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD
+    allowed-headers: "*"
+#  exposed-headers: "X-Get-Header"
+
+spring:
+    mvc:
+        pathmatch:
+            matching-strategy: ANT_PATH_MATCHER
+    servlet:
+        multipart:
+            max-file-size: 10MB
+            max-request-size: 10MB
+
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+                enable_lazy_load_no_trans: true
+                jdbc:
+                    batch_size: 50
+                    time_zone: UTC
+                metadata_builder_contributor: com.indritbreti.restprocessor.config.SqlFunctionsMetadataBuilderContributor
+        hibernate:
+            ddl-auto: create-drop # none, create, create-drop, validate, and update
+            enhancer:
+                enableLazyInitialization: true
+
+        show-sql: true
+
+    datasource:
+        username: ${DATABASE_USER:postgres}
+        password: ${DATABASE_PASSWORD:postgres}
+        url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/redscooter?reWriteBatchedInserts=true
+
+
+jwt:
+    access-token:
+        expires-in: 3600000 # millis // 1H
+    refresh-token:
+        expires-in: 7776000000 # millis
+    secret: ${JWT_SECRET:secret}
+    issuer: INDRITBRETI
+
+
+
