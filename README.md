@@ -1,4 +1,4 @@
-# SpringBoot-RestProcessor
+# Spring-RestProcessor
 Code Generation using Annotation Processors to dynamically build powerful, fully filterable/sortable REST endpoints using SpringBoot without having to write queries or define api parameters. The controllers are meant to be fully customizable overcoming the fact that generated sources cannot be modified.
 
 The project started as a dynamic query builder for JPA. I had the opportunity to further develop the project as part of my bachelor thesis.
