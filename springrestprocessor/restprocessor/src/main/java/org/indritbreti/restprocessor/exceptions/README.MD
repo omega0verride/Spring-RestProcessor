@@ -4,6 +4,6 @@ some exceptions extend others, to be able to detect "superclass" exceptions
 exceptionId will include <ex_class_0>.<ex_class_1>.<ex_class_{n}>
 
 take for example InvalidTokenTypeException which extends InvalidTokenException
-exceptionId=InvalidTokenException.InvalidTokenTypeException
+exceptionId=InvalidTok\enException.InvalidTokenTypeException
 this way you can check for InvalidTokenException and not worry about all the subclasses that derive from it (
 InvalidTokenTypeException, InvalidTokenUserException etc.)
